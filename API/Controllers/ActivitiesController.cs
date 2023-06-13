@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application;
+using Application.Activities;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Activity>> GetActivity(Guid id)
         {
-            return Ok();
+            return await Mediator.Send(new Details.Query{Id = id});
         }
     }
 }
