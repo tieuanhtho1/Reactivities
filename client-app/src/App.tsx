@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { API } from './utilities/constants';
 
 function App() {
-  const [activities, setActivities] = useState<any>(['',''])
+  const [activities, setActivities] = useState<any>([])
   useEffect(() => {
     axios.get(`${API}/activities`)
-    .then(response => {
-      setActivities(response.data)
-    })
+      .then(response => {
+        setActivities(response.data)
+      })
   }, [])
   return (
     <div className="App">
       <header className="App-header">
-        {activities.forEach((activity : any) => {
-          <li>
-            {activity}
-          </li>
-        })}
+        <ul>
+
+          {activities.map((activity: any) => (
+            <li key={activity.id}>
+              {activity.title}
+            </li>
+          ))}
+        </ul>
       </header>
     </div>
   );
