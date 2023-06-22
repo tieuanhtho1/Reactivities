@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 import 'semantic-ui-css/semantic.min.css';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import {v4 as uuid} from 'uuid'
-import agent from '../../api/agent';
+import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
 
 function App() {

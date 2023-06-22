@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { API } from "../utilities/constants";
-import { Activity } from "../app/models/activity";
+import { API } from "../../utilities/constants";
+import { Activity } from "../models/activity";
 
 axios.defaults.baseURL = API;
 
