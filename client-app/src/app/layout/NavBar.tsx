@@ -1,8 +1,9 @@
 import { Button, Container, Menu } from "semantic-ui-react";
 import { useStore } from "../stores/store";
+import { observer } from "mobx-react-lite";
 
 
-export default function NavBar() {
+export default  observer(function NavBar() {
 
     const {activityStore} = useStore();
 
@@ -16,9 +17,10 @@ export default function NavBar() {
                 </Menu.Item>
                 <Menu.Item name="Activities"/>
                 <Menu.Item>
-                    <Button onClick={() => activityStore.openForm()} positive content = "Create Activity"/>
+                    {!activityStore.editMode &&
+                    <Button onClick={() => activityStore.openForm()} positive content = "Create Activity"/>}
                 </Menu.Item>
             </Container>
         </Menu>
     )
-}
+})
