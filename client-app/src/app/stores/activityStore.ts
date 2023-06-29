@@ -19,6 +19,15 @@ export default class ActivityStore {
             Date.parse(a.date) - Date.parse(b.date));
     }
 
+    get groupActivityByDate() {
+        return Object.entries(
+            this.activitiesByDate.reduce((activities, activity,) => {
+                const date = activity.date;
+                activities[date] = activities[date] ? [...activities[date], activity] : [activity];
+                return activities;
+            }, {} as { [key: string]: Activity[] }));
+    }
+
     loadActivities = async () => {
         this.setLoadingInitial(true);
         try {
@@ -76,7 +85,7 @@ export default class ActivityStore {
 
     createActivity = async (activity: Activity) => {
         this.loading = true;
-        if(!activity.id) activity.id = uuid();
+        if (!activity.id) activity.id = uuid();
         try {
             await agent.Activities.create(activity);
             runInAction(() => {
