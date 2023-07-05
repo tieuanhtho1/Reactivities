@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Activity } from "../../../app/models/activity";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { v4 as uuid } from 'uuid';
+import * as Yup from 'yup';
 
 export default observer( function ActivityForm(){
 
@@ -24,6 +25,10 @@ export default observer( function ActivityForm(){
         date: '',
         city: '',
         venue: ''
+    });
+
+    const validationSchema = Yup.object({
+        id: Yup.string().required('The activity title is required')
     });
 
     useEffect(() => {
