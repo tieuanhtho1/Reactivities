@@ -1,8 +1,6 @@
 import { Button, Icon, Item, Label, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useStore } from "../../../app/stores/store";
 import {format} from 'date-fns'
 import ActivityListItemAttendee from "./ActivityListItemAttendee";
 import { observer } from "mobx-react-lite";
@@ -12,24 +10,16 @@ interface Props {
 }
 
 export default observer ( function ActivityListItem({ activity }: Props) {
-    const [deleteTarget, setDeleteTarget] = useState("");
-    const { activityStore } = useStore()
-
-
-    function handleActivityDelete(id: string) {
-        activityStore.deleteActivity(id);
-        setDeleteTarget(id);
-    }
-
-    function handUnfocusActivity() {
-        activityStore.cancelSelectActivity();
-    }
+    
     return (
         <Segment.Group>
             <Segment>
+                {activity.isCancelled &&
+                    <Label attached="top" color="red" content='Cancelled' style={{textAlign: 'center'}}/>
+                }
                 <Item.Group>
                     <Item>
-                        <Item.Image size="tiny" circular src='/assets/user/png' />
+                        <Item.Image style={{marginBottom: 3}} size="tiny" circular src='/assets/user.png' />
                         <Item.Content>
                             <Item.Header as={Link}
                                 to={`/activities/${activity.id}`}>{activity.title}
